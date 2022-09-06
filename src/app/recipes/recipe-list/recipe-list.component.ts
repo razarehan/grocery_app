@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
@@ -21,8 +22,13 @@ export class RecipeListComponent implements OnInit {
   //                   ½ cup water
   //                   ¼ teaspoon salt`, 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2022%2F02%2F22%2F16383-basic-crepes-mfs_003.jpg')
   // ];
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, 
+              private route: ActivatedRoute,
+              private router: Router) { }
 
+  onNewRecipe() {
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
   ngOnInit(): void {
     this.recipes = this.recipeService.getRecipes();
   }
