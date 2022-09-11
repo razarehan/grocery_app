@@ -18,4 +18,11 @@ export class DataStorageService {
         console.log(response);
       });
   }
+
+  fetchRecipes() {
+    this.http.get<Recipe[]>('https://grocery-app-5f077-default-rtdb.firebaseio.com/recipes.json')
+      .subscribe((recipes) => {
+        this.recipeService.setRecipes(recipes);
+      });
+  }
 }
